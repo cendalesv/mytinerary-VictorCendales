@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 
-const App = () => {
+function App () {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
