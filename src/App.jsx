@@ -1,22 +1,37 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Carousel from './components/Carousel'
 import CallToAction from './components/CallToAction'
+import NotFound from './pages/NotFound'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-
-function App () {
+function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow p-6">       
-        <Carousel /> 
-      </main>
+    <div>
+      <Carousel />
       <CallToAction />
-      <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow p-6">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {/* Otras rutas pueden ir aquí */}
+            <Route path="*" element={<NotFound />} /> {}
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   )
 }
 
