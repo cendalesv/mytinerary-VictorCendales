@@ -56,3 +56,5 @@ npm install react-slick slick-carousel
 4. call to action
 Instalar FontAwesome para el ícono:
 npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
+
+5. 9/10/24 instale npm install react-icons para arreglar m i menu hamburgues
