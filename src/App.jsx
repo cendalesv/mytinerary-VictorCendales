@@ -6,6 +6,7 @@ import Carousel from './components/Carousel'
 import CallToAction from './components/CallToAction'
 import NotFound from './pages/NotFound'
 import Cities from './pages/Cities'
+import CityDetail from './pages/CityDetail'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Cities" element={<Cities />} />
+            <Route path="/CityDetail/:cityId" element={<CityDetail />} /> {/* Nueva ruta */}
             <Route path="*" element={<NotFound />} /> {}
           </Routes>
         </main>

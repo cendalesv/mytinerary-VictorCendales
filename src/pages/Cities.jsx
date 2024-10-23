@@ -1,4 +1,6 @@
+// Cities.jsx
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // Importar Link
 
 function Cities() {
   // Estado para almacenar los datos de las ciudades
@@ -52,7 +54,21 @@ function Cities() {
         />
       </div>
       {filteredCities.length === 0 ? ( // Comprobar si hay ciudades filtradas
-        <p>No cities found.</p>
+        <div className="flex flex-col items-center justify-center py-10 bg-gray-100 rounded-lg border border-gray-300">
+          <img 
+            src="https://cdn-icons-png.flaticon.com/512/6328/6328501.png" // URL de imagen de 200x200
+            alt="No Cities" 
+            className="mb-4 w-52 h-52" // Establecer dimensiones 200px x 200px
+          />
+          <h2 className="text-xl font-bold text-gray-700">No cities found.</h2>
+          <p className="text-gray-500 mb-4">Try searching for another city.</p>
+          <button 
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            onClick={() => setSearchTerm("")} // Clear search term
+          >
+            Clear Search
+          </button>
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredCities.map((city) => (
@@ -64,9 +80,11 @@ function Cities() {
               />
               <h2 className="text-lg font-semibold mt-2">{city.name}</h2>
               <div className="text-left">
-                <button className="mt-4 bg-blue-500 text-white py-1 px-3 text-sm rounded hover:bg-blue-600">
-                  View More
-                </button>
+                <Link to={`/CityDetail/${city._id}`}>
+                  <button className="mt-4 bg-blue-500 text-white py-1 px-3 text-sm rounded hover:bg-blue-600">
+                    Ver Más
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
