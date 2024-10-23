@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Carousel from './components/Carousel'
 import CallToAction from './components/CallToAction'
 import NotFound from './pages/NotFound'
+import Cities from './pages/Cities'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
@@ -25,7 +26,7 @@ function App() {
         <main className="flex-grow p-6">
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* Otras rutas pueden ir aquí */}
+            <Route path="/Cities" element={<Cities />} />
             <Route path="*" element={<NotFound />} /> {}
           </Routes>
         </main>
