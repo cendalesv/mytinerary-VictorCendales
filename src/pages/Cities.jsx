@@ -76,13 +76,13 @@ function Cities() {
               <img 
                 src={city.photo || "https://via.placeholder.com/150"} // Imagen de la ciudad
                 className="w-full h-32 object-cover rounded-t-lg"
-                alt={city.name} // Texto alternativo para la imagen
+                
               />
               <h2 className="text-lg font-semibold mt-2">{city.name}</h2>
               <div className="text-left">
                 <Link to={`/CityDetail/${city._id}`}>
                   <button className="mt-4 bg-blue-500 text-white py-1 px-3 text-sm rounded hover:bg-blue-600">
-                    Ver Más
+                    View More
                   </button>
                 </Link>
               </div>

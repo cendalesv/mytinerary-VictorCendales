@@ -58,3 +58,7 @@ Instalar FontAwesome para el ícono:
 npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
 
 5. 9/10/24 instale npm install react-icons para arreglar m i menu hamburgues
+
+
+Coleccion de postman
+https://elements.getpostman.com/redirect?entityId=38911519-31a53e4a-7934-40f5-b06b-d44685397df4&entityType=collection

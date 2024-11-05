@@ -28,7 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Cities" element={<Cities />} />
-            <Route path="/CityDetail/:cityId" element={<CityDetail />} /> {/* Nueva ruta */}
+            <Route path="/CityDetail/:cityid" element={<CityDetail />} /> {/* Nueva ruta */}
             <Route path="*" element={<NotFound />} /> {}
           </Routes>
         </main>
