@@ -10,14 +10,15 @@ function CityDetail() {
   const [itineraries, setItineraries] = useState([]);
   const [itinerariesLoading, setItinerariesLoading] = useState(false);
 
+  // Función para obtener detalles de la ciudad
   useEffect(() => {
     const fetchCityDetails = async () => {
       try {
         const response = await fetch(`http://localhost:8080/api/cities/id/${cityid}`);
-        if (!response.ok) {
-          throw new Error(`Error fetching city details: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`Error fetching city details: ${response.status}`);
+        
         const data = await response.json();
+        console.log("City data:", data);  // <-- Revisar los datos de la ciudad
         setCityData(data.response);
       } catch (error) {
         console.error("Error fetching city details:", error);
@@ -29,17 +30,22 @@ function CityDetail() {
     fetchCityDetails();
   }, [cityid]);
 
+  // Función para obtener itinerarios relacionados a la ciudad
   const fetchItineraries = async () => {
-    if (!cityData || !cityData.itinerary) return;
-    
+    if (!cityData || !cityData.itinerary) {
+      console.log("No itinerary data found in city data.");  // <-- Verifica si hay itinerario
+      return;
+    }
+
     setItinerariesLoading(true);
     try {
-      const response = await fetch(`http://localhost:8080/api/itineraries/${cityData.itinerary}`);
-      if (!response.ok) {
-        throw new Error("Error fetching itineraries");
-      }
+      // Asegúrate de que cityData.itinerary tenga el ID correcto
+      const response = await fetch(`http://localhost:8080/api/itineraries/id/${cityData.itinerary}`);
+      if (!response.ok) throw new Error("Error fetching itineraries");
+
       const data = await response.json();
-      setItineraries([data.response]); // Asignamos el itinerario encontrado
+      console.log("Itineraries data:", data);  // <-- Revisar los datos del itinerario
+      setItineraries(data.response); // Cambia esto para establecer itinerarios directamente
     } catch (error) {
       console.error("Error fetching itineraries:", error);
     } finally {
@@ -47,24 +53,23 @@ function CityDetail() {
     }
   };
 
+  // Abrir el modal y cargar los itinerarios
   const handleOpenModal = () => {
     fetchItineraries();
     setIsModalOpen(true);
   };
 
+  // Cerrar el modal
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
-  if (loading) {
-    return <p>Loading city details...</p>;
-  }
+  if (loading) return <p>Loading city details...</p>;
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       {cityData ? (
         <div className="flex flex-col items-center space-y-6 max-w-full w-full">
-          {/* Image box */}
           <div className="w-full h-80 max-w-2xl rounded-lg overflow-hidden shadow-lg">
             <img
               src={cityData.photo || "https://via.placeholder.com/150"}
@@ -73,7 +78,6 @@ function CityDetail() {
             />
           </div>
 
-          {/* Details box */}
           <div className="bg-white rounded-lg shadow-lg p-6 w-full">
             <h1 className="text-2xl font-bold mb-4 text-center">{cityData.name || 'City Name'}</h1>
             <p className="text-lg mb-4 text-gray-700 text-center">{cityData.Description || 'Description not available'}</p>
@@ -94,34 +98,51 @@ function CityDetail() {
                 Back to Cities
               </button>
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
                 onClick={handleOpenModal}
+                className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
               >
                 Itineraries
               </button>
             </div>
           </div>
 
-          {/* Modal */}
+          {/* Modal para mostrar itinerarios */}
           {isModalOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white rounded-lg p-6 max-w-md w-full">
-                <h3 className="text-xl font-bold mb-4">Itineraries for {cityData.name}</h3>
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <div className="bg-white rounded-lg p-6 shadow-lg w-96">
+                <h2 className="text-xl font-semibold mb-4">Itineraries for {cityData.name}</h2>
                 {itinerariesLoading ? (
                   <p>Loading itineraries...</p>
                 ) : itineraries.length > 0 ? (
-                  itineraries.map((itinerary) => (
-                    <div key={itinerary._id} className="mb-4">
-                      <h4 className="text-lg font-semibold">{itinerary.name}</h4>
-                      <p>{itinerary.description}</p>
-                    </div>
-                  ))
+                  <ul className="space-y-2">
+                    {itineraries.map((itinerary) => (
+                      <li key={itinerary._id} className="p-2 border rounded">
+                        <h3 className="font-bold">{itinerary.publisherName}</h3>
+                        <p>Price: ${itinerary.price}</p>
+                        <p>Duration: {itinerary.duration} hours</p>
+                        <p>Likes: {itinerary.likes}</p>
+                        <p>Hashtags: {itinerary.hashtags.join(", ")}</p>
+                        {itinerary.comments.length > 0 && (
+                          <div>
+                            <h4 className="font-semibold">Comments:</h4>
+                            <ul>
+                              {itinerary.comments.map((comment) => (
+                                <li key={comment._id}>
+                                  <strong>{comment.user}:</strong> {comment.text} on {new Date(comment.date).toLocaleDateString()}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
                 ) : (
                   <p>No itineraries found for this city.</p>
                 )}
                 <button
-                  className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                   onClick={handleCloseModal}
+                  className="mt-4 bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
                 >
                   Close
                 </button>
@@ -130,7 +151,7 @@ function CityDetail() {
           )}
         </div>
       ) : (
-        <p>City not found...</p>
+        <p>City data not found.</p>
       )}
     </div>
   );
