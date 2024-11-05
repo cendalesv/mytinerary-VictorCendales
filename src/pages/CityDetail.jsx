@@ -86,12 +86,12 @@ function CityDetail() {
             <div className="flex justify-between mt-6">
               <button 
                 onClick={() => navigate('/cities')} // Navegación al volver a ciudades
-                className="bg-gray-300 text-black py-2 px-4 rounded-lg hover:bg-gray-400 transition duration-300"
+                className="bg-gray-300 text-black py-2 px-4 rounded-lg hover:bg-gray-400 transition duration-300 ml-14"
               >
                 Back to Cities
               </button>
               <button 
-                className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300" 
+                className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 mr-14" 
                 onClick={handleOpenModal} // Abre el modal
               >
                 Itineraries
