@@ -12,6 +12,8 @@ import Cities from './pages/Cities';
 import CityDetail from './pages/CityDetail';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import SignUp from './pages/SignUp.jsx'; // Importa el componente
+
 
 function Home() {
   return (
@@ -24,7 +26,7 @@ function Home() {
 
 function App() {
   return (
-    <Provider store={store}> {/* Proveer el store aquí */}
+    <Provider store={store}>
       <Router>
         <div className="flex flex-col min-h-screen">
           <Navbar />
@@ -33,6 +35,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/Cities" element={<Cities />} />
               <Route path="/CityDetail/:cityid" element={<CityDetail />} />
+              <Route path="/signup" element={<SignUp />} /> {/* Nueva ruta */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

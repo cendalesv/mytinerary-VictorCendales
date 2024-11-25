@@ -38,9 +38,9 @@ function Cities() {
 
   // Filtrar las ciudades según el término de búsqueda
   const filteredCities = citiesData.filter((city) =>
-    city.name.toLowerCase().includes(searchTerm.toLowerCase())
+    `${city.name} ${city.country}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  
   return (
     <div className="p-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-4">
