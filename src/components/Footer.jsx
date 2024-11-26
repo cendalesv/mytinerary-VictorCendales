@@ -13,7 +13,7 @@ function Footer() {
               <a href="#" className="hover:underline">Cities</a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:underline">Login</a>
+              <a href="#" className="hover:underline">Sign Up</a>
             </li>
           </ul>
         </div>

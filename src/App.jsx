@@ -1,8 +1,8 @@
 // App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Provider } from 'react-redux'; // Importa el Provider
-import store from './redux/store.js'; // Importa el store
+import { Provider } from 'react-redux';
+import store from './redux/store.js';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Carousel from './components/Carousel';
@@ -12,7 +12,8 @@ import Cities from './pages/Cities';
 import CityDetail from './pages/CityDetail';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import SignUp from './pages/SignUp.jsx'; // Importa el componente
+import SignUp from './pages/SignUp.jsx';
+import SignIn from './pages/SignIn.jsx';
 
 
 function Home() {
@@ -35,7 +36,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/Cities" element={<Cities />} />
               <Route path="/CityDetail/:cityid" element={<CityDetail />} />
-              <Route path="/signup" element={<SignUp />} /> {/* Nueva ruta */}
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signin" element={<SignIn />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

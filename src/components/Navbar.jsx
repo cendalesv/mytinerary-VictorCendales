@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; // Cambiamos <a> por <Link> para usar react-router
+import React, { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom"; // Cambiamos <a> por <Link> para usar react-router
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +28,9 @@ function Navbar() {
           <Link to="/signup" className="text-white text-lg hover:text-gray-300">
             Sign Up
           </Link>
+          <Link to="/signin" className="text-white text-lg hover:text-gray-300">
+            Sign In
+          </Link>
         </div>
 
         {/* Botón hamburguesa */}
@@ -48,11 +51,20 @@ function Navbar() {
           <Link to="/" className="block text-white text-lg hover:text-gray-300">
             Home
           </Link>
-          <Link to="/cities" className="block text-white text-lg hover:text-gray-300">
+          <Link
+            to="/cities"
+            className="block text-white text-lg hover:text-gray-300"
+          >
             Cities
           </Link>
-          <Link to="/signup" className="block text-white text-lg hover:text-gray-300">
+          <Link
+            to="/signup"
+            className="block text-white text-lg hover:text-gray-300"
+          >
             Sign Up
+          </Link>
+          <Link to="/signin" className="text-white text-lg hover:text-gray-300">
+            Sign In
           </Link>
         </div>
       )}
